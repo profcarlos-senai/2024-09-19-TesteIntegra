@@ -7,37 +7,45 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Estudante {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	private String nome;
-	
-	private int idade;
 
-	public Long getId() {
-		return id;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    private String nome;
 
-	public String getNome() {
-		return nome;
-	}
+    private int idade;
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public int getIdade() {
-		return idade;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setIdade(int idade) {
-		this.idade = idade;
-	}
+    public String getNome() {
+        return nome;
+    }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
+
+    public Estudante() {
+    }
+
+    public Estudante(Long id, String nome, int idade) {
+        this.id = id;
+        this.nome = nome;
+        this.idade = idade;
+    }
 }

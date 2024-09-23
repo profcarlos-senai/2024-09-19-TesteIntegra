@@ -2,6 +2,7 @@ package com.fourcatsdev.entitycrudrest.controle;
 
 import java.util.List;
 
+import com.fourcatsdev.entitycrudrest.modelo.Estudante;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fourcatsdev.entitycrudrest.dto.EstudanteCreateDTO;
+import com.fourcatsdev.entitycrudrest.dto.EstudanteUpdateDTO;
 import com.fourcatsdev.entitycrudrest.dto.EstudanteResponseDTO;
 import com.fourcatsdev.entitycrudrest.dto.mapper.EstudanteMapper;
 import com.fourcatsdev.entitycrudrest.excecao.EstudanteNotFoundException;
-import com.fourcatsdev.entitycrudrest.modelo.Estudante;
 import com.fourcatsdev.entitycrudrest.servico.EstudanteServico;
 
 import jakarta.validation.Valid;
@@ -59,8 +60,9 @@ public class EstudanteControle {
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Object> alterar(@PathVariable(value = "id") Long id,
-			@RequestBody @Valid EstudanteCreateDTO estudanteCreateDTO) throws EstudanteNotFoundException {
-		Estudante estudante = estudanteMapper.toEntity(estudanteCreateDTO);
+			@RequestBody @Valid EstudanteUpdateDTO estudanteUpdateDTO) throws EstudanteNotFoundException {
+		Estudante estudante = estudanteMapper.toEntity(estudanteUpdateDTO);
+		estudante.setId(id);
 		Estudante estudanteGravado = estudanteServico.alterarEstudante(id, estudante);
 		EstudanteResponseDTO estudanteResponseDTO = estudanteMapper.toDTO(estudanteGravado);
 		return ResponseEntity.status(HttpStatus.OK).body(estudanteResponseDTO);
