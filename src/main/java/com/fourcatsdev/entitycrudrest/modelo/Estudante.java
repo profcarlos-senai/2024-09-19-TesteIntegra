@@ -4,6 +4,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.beans.factory.annotation.Value;
 
 @Entity
 public class Estudante {
@@ -12,8 +17,11 @@ public class Estudante {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Nome não pode ficar vazio ou em branco")
     private String nome;
 
+    @NotNull(message = "Idade não pode ser nula")
+    @Min(value = 1, message = "Idade não pode ser menor que 1")
     private int idade;
 
     public Long getId() {
